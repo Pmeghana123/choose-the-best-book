@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose the Best Book</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@400;700&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Roboto', sans-serif;
+            background-image: url('https://t3.ftcdn.net/jpg/03/16/86/98/360_F_316869849_oHD2qOXRJlZE2Md6SNv0MtvDcgZyHkfv.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .login-register-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            width: 350px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="password"], input[type="email"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #61dafb;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #4da3d4;
+        }
+
+        .switch-form {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .switch-form a {
+            color: #61dafb;
+            text-decoration: none;
+        }
+
+        .switch-form a:hover {
+            text-decoration: underline;
+        }
+
+        /* Book list styles */
+        main {
+            display: none; /* Initially hidden */
+            padding: 20px;
+            text-align: center;
+        }
+
+        .book-type {
+            margin-bottom: 20px;
+        }
+
+        .book-list {
+            display: none; /* Initially hidden */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Login/Register Container -->
+    <div class="login-register-container" id="login-form">
+        <h2>Login</h2>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password">
+        </div>
+        <button type="button" onclick="login()">Login</button>
+        <div class="switch-form">
+            <p>Don't have an account? <a href="javascript:void(0)" onclick="showRegisterForm()">Register here</a></p>
+        </div>
+    </div>
+
+    <div class="login-register-container" id="register-form" style="display: none;">
+        <h2>Register</h2>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username">
+        </div>
+        <div class="form-group">
+            <label for="reg-email">Email</label>
+            <input type="email" id="reg-email" name="email" placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+            <label for="reg-password">Password</label>
+            <input type="password" id="reg-password" name="password" placeholder="Enter your password">
+        </div>
+        <button type="button" onclick="register()">Register</button>
+        <div class="switch-form">
+            <p>Already have an account? <a href="javascript:void(0)" onclick="showLoginForm()">Login here</a></p>
+        </div>
+    </div>
+
+    <header>
+        <h1>Choose the Best Book</h1>
+        <p>Find your next great read based on type, title, and author</p>
+    </header>
+    
+    <main id="mainContent">
+        <section class="book-type" id="fiction">
+            <h2 onclick="toggleBooks('fiction-books')">Fiction</h2>
+            <div class="book-list" id="fiction-books">
+                <article>
+                    <h3>To Kill a Mockingbird</h3>
+                    <p>by Harper Lee (1960)</p>
+                    <a href="https://en.wikipedia.org/wiki/To_Kill_a_Mockingbird" target="_blank">For more info</a>
+                </article>
+                <article>
+                    <h3>1984</h3>
+                    <p>by George Orwell (1949)</p>
+                    <a href="https://en.wikipedia.org/wiki/Nineteen_Eighty-Four" target="_blank">For more info</a>
+                </article>
+                <article>
+                    <h3>The Great Gatsby</h3>
+                    <p>by F. Scott Fitzgerald (1925)</p>
+                    <a href="https://en.wikipedia.org/wiki/The_Great_Gatsby" target="_blank">For more info</a>
+                </article>
+            </div>
+        </section>
+        <section class="book-type" id="non-fiction">
+            <h2 onclick="toggleBooks('non-fiction-books')">Non-Fiction</h2>
+            <div class="book-list" id="non-fiction-books">
+                <article>
+                    <h3>Sapiens: A Brief History of Humankind</h3>
+                    <p>by Yuval Noah Harari (2011)</p>
+                    <a href="https://en.wikipedia.org/wiki/Sapiens:_A_Brief_History_of_Humankind" target="_blank">For more info</a>
+                </article>
+                <article>
+                    <h3>Becoming</h3>
+                    <p>by Michelle Obama (2018)</p>
+                    <a href="https://en.wikipedia.org/wiki/Becoming_(book)" target="_blank">For more info</a>
+                </article>
+                <article>
+                    <h3>Educated</h3>
+                    <p>by Tara Westover (2018)</p>
+                    <a href="https://en.wikipedia.org/wiki/Educated_(book)" target="_blank">For more info</a>
+                </article>
+            </div>
+        </section>
+        <section class="book-type" id="mystery-thriller">
+            <h2 onclick="toggleBooks('mystery-thriller-books')">Mystery & Thriller</h2>
+            <div class="book-list" id="mystery-thriller-books">
+                <article>
+                    <h3>Gone Girl</h3>
+                    <p>by Gillian Flynn (2012)</p>
+                    <a href="https://en.wikipedia.org/wiki/Gone_Girl_(novel)" target="_blank">For more info</a>
+                </article>
+                <article>
+                    <h3>The Girl with the Dragon Tattoo</h3>
+                    <p>by Stieg Larsson (2005)</p>
+                    <a href="https://en.wikipedia.org/wiki/The_Girl_with_the_Dragon_Tattoo" target="_blank">For more info</a>
+                </article>
+            </div>
+        </section>
+        <section class="book-type" id="sci-fi-fantasy">
+            <h2 onclick="toggleBooks('sci-fi-fantasy-books')">Science Fiction & Fantasy</h2>
+            <div class="book-list" id="sci-fi-fantasy-books">
+                <article>
+                    <h3>Dune</h3>
+                    <p>by Frank Herbert (1965)</p>
+                    <a href="https://en.wikipedia.org/wiki/Dune_(novel)" target="_blank">For more info</a>
+                </article>
+                <article>
+                    <h3>The Hobbit</h3>
+                    <p>by J.R.R. Tolkien (1937)</p>
+                    <a href="https://en.wikipedia.org/wiki/The_Hobbit" target="_blank">For more info</a>
+                </article>
+            </div>
+        </section>
+        <section class="book-type" id="romance">
+            <h2 onclick="toggleBooks('romance-books')">Romance</h2>
+            <div class="book-list" id="romance-books">
+                <article>
+                    <h3>Pride and Prejudice</h3>
+                    <p>by Jane Austen (1813)</p>
+                    <a href="https://en.wikipedia.org/wiki/Pride_and_Prejudice" target="_blank">For more info</a>
+                </article>
+                <article>
+                    <h3>The Notebook</h3>
+                    <p>by Nicholas Sparks (1996)</p>
+                    <a href="https://en.wikipedia.org/wiki/The_Notebook" target="_blank">For more info</a>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>All rights reserved</p>
+    </footer>   
+
+    <script>
+        const users = {}; // Object to store registered users
+
+        function showRegisterForm() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('register-form').style.display = 'block';
+        }
+
+        function showLoginForm() {
+            document.getElementById('register-form').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+        }
+
+        function register() {
+            const newUsername = document.getElementById('username').value;
+            const newEmail = document.getElementById('reg-email').value;
+            const newPassword = document.getElementById('reg-password').value;
+
+            // Check if the username or email already exists
+            if (users[newEmail]) {
+                alert('Email already registered. Please use another email.');
+                return;
+            }
+
+            // Save the new user
+            users[newEmail] = newPassword;
+            alert('Registration successful! You can now log in.');
+            showLoginForm();
+        }
+
+        function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Check if user exists and password matches
+            if (users[email] && users[email] === password) {
+                alert('Login successful!');
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('mainContent').style.display = "block"; // Show main content after login
+            } else {
+                alert('Invalid credentials, please try again.');
+            }
+        }
+
+        function toggleBooks(id) {
+            const bookList = document.getElementById(id);
+            bookList.style.display = bookList.style.display === 'block' ? 'none' : 'block';
+        }
+    </script> 
+</body>
+</html>
